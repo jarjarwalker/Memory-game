@@ -3,7 +3,7 @@
  */
 let _array = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf", "bicycle", "bomb"];
 
-_array = _array.concat(_array);
+_array = [..._array,..._array];
 
 
 
@@ -60,12 +60,23 @@ function do_shuffle() {
     console.log(_array);
 }
 
+let openCards = [];
+console.log(openCards);
+
+//flip over card
 function do_action(e){
-   let card = e.target;
-   card.setAttribute("class","card open show");
-}
+    let card = e.target;
+    openCards.push(card);
+    if(openCards.length > 2){            
 
+    }else{
+        card.classList.add('open', 'show');            
+    }
 
+ }
+ 
+
+//Create deck of cards as a list and adds it to the HTML
 window.onload = function () {
     //<li class="card">
     const $deck = document.querySelector("ul.deck");
@@ -74,6 +85,12 @@ window.onload = function () {
         card.setAttribute("class", "card");
         card.addEventListener("click", do_action);
         $deck.append(card);
+
+        
+
+
+        
+        
     }
     do_shuffle();
 
