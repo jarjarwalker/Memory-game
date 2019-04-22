@@ -44,12 +44,13 @@ function shuffle(array) {
  */
 
 
-
+//Shuffle deck of cards
 function do_shuffle() {
     console.log(_array);
     _array = shuffle(_array);
     const $deck = document.querySelector("ul.deck");
     const $cards = $deck.querySelectorAll("li");
+    //Create card
     let i = 0;
     for (let key in $cards) {
         const card = $cards[key];
@@ -66,12 +67,43 @@ console.log(openCards);
 //flip over card
 function do_action(e){
     let card = e.target;
-    openCards.push(card);
-    if(openCards.length > 2){            
 
-    }else{
-        card.classList.add('open', 'show');            
+    if(!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('matched')){
+        openCards.push(card);
+        card.classList.add('open', 'show');
+
+
+        //Check if cards match
+        /* let firstCardType = openCards[0].querySelector('i').classList.item(1);
+        let secondCardType = openCards[1].querySelector('i').classList.item(1);
+        console.log(firstCardType);
+        console.log(secondCardType);    */
+
+
+        
+        if(openCards.length == 2){
+           if(openCards[0].querySelector('i').classList.item(1) == openCards[1].querySelector('i').classList.item(1)){
+               openCards[0].classList.add('match');
+               openCards[1].classList.add('match');
+           }
+            
+            
+            //If cards do not match flip them back over
+            setTimeout(function(){
+                for(let cards of openCards){
+                    cards.classList.remove('open','show')
+                }
+        
+                openCards = [];
+                
+            }, 1000); 
+                                
+            }
+
+    
+
     }
+    
 
  }
  
