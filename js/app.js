@@ -53,7 +53,7 @@ function do_shuffle() {
     //Create card
     let i = 0;
     for (let key in $cards) {
-        const card = $cards[key];
+        const card = $cards[key];      
         card.innerHTML = `<i class="fa fa-${_array[i]}"></i>`;
         i++;
     }
@@ -64,6 +64,10 @@ function do_shuffle() {
 let openCards = [];
 console.log(openCards);
 
+let moves = 0;
+let movesCounter = document.querySelector('.moves');
+let matchedPairs = 0;
+
 //flip over card
 function do_action(e){
     let card = e.target;
@@ -71,14 +75,6 @@ function do_action(e){
     if(!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('matched')){
         openCards.push(card);
         card.classList.add('open', 'show');
-
-
-        //Check if cards match
-        /* let firstCardType = openCards[0].querySelector('i').classList.item(1);
-        let secondCardType = openCards[1].querySelector('i').classList.item(1);
-        console.log(firstCardType);
-        console.log(secondCardType);    */
-
 
         
         if(openCards.length == 2){
@@ -103,6 +99,8 @@ function do_action(e){
     
 
     }
+    moves+= 1;
+    movesCounter.innerHTML = moves;
     
 
  }
