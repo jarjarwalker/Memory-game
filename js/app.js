@@ -102,7 +102,12 @@ function do_action(e){
 
     }
     moves+= 1;
-    movesCounter.innerHTML = moves;
+    if (moves == 1) {
+        movesCounter.innerHTML = moves + " move";
+    } else{
+        movesCounter.innerHTML = moves + " moves";
+    }
+    
     rating(moves);
     
 
@@ -112,12 +117,12 @@ function do_action(e){
 
  function rating(x){
     
-    if (x > 10) {
+    if (x == 20) {
 
         starRating.firstElementChild.remove();
         
     }
-    if (x > 20) {
+    if (x == 30) {
 
         starRating.firstElementChild.remove();
         
