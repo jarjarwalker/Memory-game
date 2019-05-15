@@ -8,6 +8,8 @@ _array = [..._array,..._array];
 
 
 
+
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -68,7 +70,7 @@ let moves = 0;
 let movesCounter = document.querySelector('.moves');
 let matchedPairs = 0;
 
-//flip over card
+//function to flip over cards and matches them
 function do_action(e){
     let card = e.target;
 
@@ -76,7 +78,7 @@ function do_action(e){
         openCards.push(card);
         card.classList.add('open', 'show');
 
-        
+        //lock matching cards and keep them in open position
         if(openCards.length == 2){
            if(openCards[0].querySelector('i').classList.item(1) == openCards[1].querySelector('i').classList.item(1)){
                openCards[0].classList.add('match');
@@ -101,20 +103,39 @@ function do_action(e){
     }
     moves+= 1;
     movesCounter.innerHTML = moves;
+    rating(moves);
     
+
+ }
+
+ let starRating = document.querySelector('ul.stars');
+
+ function rating(x){
+    
+    if (x > 10) {
+
+        starRating.firstElementChild.remove();
+        
+    }
+    if (x > 20) {
+
+        starRating.firstElementChild.remove();
+        
+    }
 
  }
  
 
 //Create deck of cards as a list and adds it to the HTML
 window.onload = function () {
-    //<li class="card">
-    const $deck = document.querySelector("ul.deck");
+    
+    const deck = document.querySelector("ul.deck");
     for (let i = 0; i < 16; i++) {
         const card = document.createElement("li");
         card.setAttribute("class", "card");
         card.addEventListener("click", do_action);
-        $deck.append(card);
+        deck.append(card);
+        
 
         
 
@@ -123,6 +144,9 @@ window.onload = function () {
         
     }
     do_shuffle();
+    
+    
+
 
     
 
