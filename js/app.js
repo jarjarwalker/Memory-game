@@ -46,16 +46,34 @@ function shuffle(array) {
  */
 
 
-//Shuffle deck of cards
-function do_shuffle() {
+//Shuffle deck of cards and reset 
+function resetButton() {
     console.log(_array);
     _array = shuffle(_array);
-    const $deck = document.querySelector("ul.deck");
-    const $cards = $deck.querySelectorAll("li");
-    //Create card
+    const deck = document.querySelector("ul.deck");
+    const cards = deck.querySelectorAll("li");
+    timerText.innerHTML = "";
+    moves = 0;
+    c = 0;
+    stopCount();
+  /*   cards[0].classList.remove('match');
+    cards[1].classList.remove('match');
+    cards[2].classList.remove('match');
+    cards[3].classList.remove('match');
+    cards[4].classList.remove('match');
+    cards[5].classList.remove('match');
+    cards[6].classList.remove('match');
+    cards[7].classList.remove('match');
+    cards[8].classList.remove('match');
+    cards[9].classList.remove('match');
+    cards[10].classList.remove('match'); */
+    movesCounter.innerHTML = " ";
+
+    
     let i = 0;
-    for (let key in $cards) {
-        const card = $cards[key];      
+    for (let key in cards) {
+        const card = cards[key];
+        //cards[key].classList.remove('match');     
         card.innerHTML = `<i class="fa fa-${_array[i]}"></i>`;
         i++;
     }
@@ -74,7 +92,7 @@ let matchedPairs = 0;
 function do_action(e){
     let card = e.target;
 
-    if(!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('matched')){
+    if(!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')){
         openCards.push(card);
         card.classList.add('open', 'show');
 
@@ -83,6 +101,12 @@ function do_action(e){
            if(openCards[0].querySelector('i').classList.item(1) == openCards[1].querySelector('i').classList.item(1)){
                openCards[0].classList.add('match');
                openCards[1].classList.add('match');
+               openCards[0].classList.remove('open');
+               openCards[0].classList.remove('show');
+               openCards[1].classList.remove('open');
+               openCards[1].classList.remove('show');
+
+               matchedPairs += 1;
            }
             
             
@@ -109,6 +133,14 @@ function do_action(e){
     }
     
     rating(moves);
+    startCount();
+
+    if (matchedPairs == 8) {
+
+        stopCount();
+        
+    }
+
     
 
  }
@@ -129,6 +161,29 @@ function do_action(e){
     }
 
  }
+
+let c = 0;
+let t;
+let timer_is_on = 0;
+let timerText = document.querySelector(".timer");
+
+function timedCount() {
+  timerText.innerHTML = c + " seconds";
+  c = c + 1;
+  t = setTimeout(timedCount, 1000);
+}
+
+function startCount() {
+  if (moves == 1) {
+    timer_is_on = 1;
+    timedCount();
+  }
+}
+
+function stopCount() {
+  clearTimeout(t);
+  timer_is_on = 0;
+}
  
 
 //Create deck of cards as a list and adds it to the HTML
@@ -148,13 +203,13 @@ window.onload = function () {
         
         
     }
-    do_shuffle();
+    resetButton();
     
     
 
 
     
 
-    document.querySelector('.restart').addEventListener("click", do_shuffle);
+    document.querySelector('.restart').addEventListener("click", resetButton);
 
 };
