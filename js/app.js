@@ -6,19 +6,7 @@ let _array = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf", "bic
 _array = [..._array,..._array];
 
 //modal element
-let modal = document.getElementById('congratsModal');
-// open modal button
-let modalBtn = document.getElementById('modalBtn');
-//Get close Btn
-let closeBtn = document.querySelector('.closeBtn');
 
-let finalMoves = document.querySelector('.finalMoves');
-let finalTime = document.querySelector('.finalTime');
-
-//listen for click
-modalBtn.addEventListener('click', openModal);
-
-closeBtn.addEventListener('click',closeModal);
 
 
 /*
@@ -237,13 +225,26 @@ window.onload = function () {
     document.querySelector('.restart').addEventListener("click", resetButton);
 
 };
+
+let modal = document.getElementById('congratsModal');
+// open modal button
+let modalBtn = document.getElementById('modalBtn');
+//Get close Btn
+let closeBtn = document.querySelector('.closeBtn');
+
+let finalMoves = document.querySelector('.finalMoves');
+let finalTime = document.querySelector('.finalTime');
+
+//listen for click
+modalBtn.addEventListener('click', openModal);
+
+closeBtn.addEventListener('click',closeModal);
 //function to open modal
 
 function openModal(){
     modal.style.display = 'block';
     finalScore();
-    finalMoves.innerHTML = moves;
-    finalTime.innerHTML = c;
+    
 }
 
 function closeModal(){
@@ -253,6 +254,9 @@ function closeModal(){
 
 let score = document.getElementById('finalScore');
 let starCount = starRating.childElementCount;
+
+finalMoves.innerHTML = moves;
+finalTime.innerHTML = c;
 
 /* function finalScore() {
     if (starRating.childElementCount == 3) {
