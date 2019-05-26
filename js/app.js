@@ -5,9 +5,20 @@ let _array = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf", "bic
 
 _array = [..._array,..._array];
 
+//modal element
+let modal = document.getElementById('congratsModal');
+// open modal button
+let modalBtn = document.getElementById('modalBtn');
+//Get close Btn
+let closeBtn = document.querySelector('.closeBtn');
 
+let finalMoves = document.querySelector('.finalMoves');
+let finalTime = document.querySelector('.finalTime');
 
+//listen for click
+modalBtn.addEventListener('click', openModal);
 
+closeBtn.addEventListener('click',closeModal);
 
 
 /*
@@ -33,7 +44,6 @@ function shuffle(array) {
     return array;
 }
 
-
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -56,24 +66,28 @@ function resetButton() {
     moves = 0;
     c = 0;
     stopCount();
-  /*   cards[0].classList.remove('match');
-    cards[1].classList.remove('match');
-    cards[2].classList.remove('match');
-    cards[3].classList.remove('match');
-    cards[4].classList.remove('match');
-    cards[5].classList.remove('match');
-    cards[6].classList.remove('match');
-    cards[7].classList.remove('match');
-    cards[8].classList.remove('match');
-    cards[9].classList.remove('match');
-    cards[10].classList.remove('match'); */
+    openCards = [];
     movesCounter.innerHTML = " ";
+
+    starRating.innerHTML = '<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>';    
+    
+    
+    
+
+    for (let i = 0; i < cards.length; i++) {
+
+        cards[i].classList.remove('match');
+        cards[i].classList.remove('open');
+        cards[i].classList.remove('show');
+
+        
+    }    
 
     
     let i = 0;
     for (let key in cards) {
         const card = cards[key];
-        //cards[key].classList.remove('match');     
+         
         card.innerHTML = `<i class="fa fa-${_array[i]}"></i>`;
         i++;
     }
@@ -126,6 +140,8 @@ function do_action(e){
 
     }
     moves+= 1;
+
+    
     if (moves == 1) {
         movesCounter.innerHTML = moves + " move";
     } else{
@@ -138,8 +154,11 @@ function do_action(e){
     if (matchedPairs == 8) {
 
         stopCount();
+        openModal();
         
     }
+
+    
 
     
 
@@ -149,18 +168,22 @@ function do_action(e){
 
  function rating(x){
     
-    if (x == 20) {
+    if (x == 5) {
 
         starRating.firstElementChild.remove();
         
     }
-    if (x == 30) {
+    if (x == 10) {
 
         starRating.firstElementChild.remove();
         
     }
+
 
  }
+ 
+
+
 
 let c = 0;
 let t;
@@ -206,6 +229,7 @@ window.onload = function () {
     resetButton();
     
     
+    
 
 
     
@@ -213,3 +237,30 @@ window.onload = function () {
     document.querySelector('.restart').addEventListener("click", resetButton);
 
 };
+//function to open modal
+
+function openModal(){
+    modal.style.display = 'block';
+    finalScore();
+    finalMoves.innerHTML = moves;
+    finalTime.innerHTML = c;
+}
+
+function closeModal(){
+    resetButton();
+    modal.style.display = 'none';
+}
+
+let score = document.getElementById('finalScore');
+let starCount = starRating.childElementCount;
+
+/* function finalScore() {
+    if (starRating.childElementCount == 3) {
+        finalScore.innerHTML = '<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>';
+    } else if (starRating.childElementCount == 2) {
+        finalScore.innerHTML = '<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>';
+    } else {
+        finalScore.innerHTML = '<li><i class="fa fa-star"></i></li>';
+    }
+}
+ */

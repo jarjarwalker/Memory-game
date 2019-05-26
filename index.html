@@ -17,9 +17,9 @@
 
         <section class="score-panel">
         	<ul class="stars">
+        		<!-- <li><i class="fa fa-star"></i></li>
         		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
+        		<li><i class="fa fa-star"></i></li> -->
         	</ul>
 
             <span class="moves"></span>
@@ -35,6 +35,19 @@
         </ul>
     </div>
 
+     <button id="modalBtn" class="button">Click Here</button>
+    <div id ="congratsModal" class="modal">
+        <div class="modal-content">
+            <span class="closeBtn">&times;</span>
+            <p><strong>Congratulations you beat the game</strong></p>
+            <p>Your Score:</p><ul class="stars" id="finalScore"></ul>
+            <p>It took you <span class="finalTime"></span> seconds to complete the game</p>
+            <p>You completed the game in <span class="finalMoves"></span> moves</p>
+            <p>Play again!</p>
+
+        </div>
+
+    </div>
     <script src="js/app.js"></script>
 </body>
 </html>
