@@ -3,7 +3,7 @@
  */
 let _array = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf", "bicycle", "bomb"];
 
-_array = [..._array,..._array];
+_array = [..._array, ..._array];
 
 //modal element
 
@@ -57,10 +57,10 @@ function resetButton() {
     openCards = [];
     movesCounter.innerHTML = " ";
 
-    starRating.innerHTML = '<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>';    
-    
-    
-    
+    starRating.innerHTML = '<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>';
+
+
+
 
     for (let i = 0; i < cards.length; i++) {
 
@@ -68,14 +68,14 @@ function resetButton() {
         cards[i].classList.remove('open');
         cards[i].classList.remove('show');
 
-        
-    }    
 
-    
+    }
+
+
     let i = 0;
     for (let key in cards) {
         const card = cards[key];
-         
+
         card.innerHTML = `<i class="fa fa-${_array[i]}"></i>`;
         i++;
     }
@@ -91,51 +91,51 @@ let movesCounter = document.querySelector('.moves');
 let matchedPairs = 0;
 
 //function to flip over cards and matches them
-function do_action(e){
+function do_action(e) {
     let card = e.target;
 
-    if(!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')){
+    if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
         openCards.push(card);
         card.classList.add('open', 'show');
 
         //lock matching cards and keep them in open position
-        if(openCards.length == 2){
-           if(openCards[0].querySelector('i').classList.item(1) == openCards[1].querySelector('i').classList.item(1)){
-               openCards[0].classList.add('match');
-               openCards[1].classList.add('match');
-               openCards[0].classList.remove('open');
-               openCards[0].classList.remove('show');
-               openCards[1].classList.remove('open');
-               openCards[1].classList.remove('show');
+        if (openCards.length == 2) {
+            if (openCards[0].querySelector('i').classList.item(1) == openCards[1].querySelector('i').classList.item(1)) {
+                openCards[0].classList.add('match');
+                openCards[1].classList.add('match');
+                openCards[0].classList.remove('open');
+                openCards[0].classList.remove('show');
+                openCards[1].classList.remove('open');
+                openCards[1].classList.remove('show');
 
-               matchedPairs += 1;
-           }
-            
-            
-            //If cards do not match flip them back over
-            setTimeout(function(){
-                for(let cards of openCards){
-                    cards.classList.remove('open','show')
-                }
-        
-                openCards = [];
-                
-            }, 1000); 
-                                
+                matchedPairs += 1;
             }
 
-    
+
+            //If cards do not match flip them back over
+            setTimeout(function () {
+                for (let cards of openCards) {
+                    cards.classList.remove('open', 'show')
+                }
+
+                openCards = [];
+
+            }, 1000);
+
+        }
+
+
 
     }
-    moves+= 1;
+    moves += 1;
 
-    
+
     if (moves == 1) {
         movesCounter.innerHTML = moves + " move";
-    } else{
+    } else {
         movesCounter.innerHTML = moves + " moves";
     }
-    
+
     rating(moves);
     startCount();
 
@@ -143,33 +143,33 @@ function do_action(e){
 
         stopCount();
         openModal();
-        
+
     }
 
-    
 
-    
 
- }
 
- let starRating = document.querySelector('ul.stars');
 
- function rating(x){
-    
+}
+
+let starRating = document.querySelector('ul.stars');
+
+function rating(x) {
+
     if (x == 5) {
 
         starRating.firstElementChild.remove();
-        
+
     }
     if (x == 10) {
 
         starRating.firstElementChild.remove();
-        
+
     }
 
 
- }
- 
+}
+
 
 
 
@@ -179,48 +179,48 @@ let timer_is_on = 0;
 let timerText = document.querySelector(".timer");
 
 function timedCount() {
-  timerText.innerHTML = c + " seconds";
-  c = c + 1;
-  t = setTimeout(timedCount, 1000);
+    timerText.innerHTML = c + " seconds";
+    c = c + 1;
+    t = setTimeout(timedCount, 1000);
 }
 
 function startCount() {
-  if (moves == 1) {
-    timer_is_on = 1;
-    timedCount();
-  }
+    if (moves == 1) {
+        timer_is_on = 1;
+        timedCount();
+    }
 }
 
 function stopCount() {
-  clearTimeout(t);
-  timer_is_on = 0;
+    clearTimeout(t);
+    timer_is_on = 0;
 }
- 
+
 
 //Create deck of cards as a list and adds it to the HTML
 window.onload = function () {
-    
+
     const deck = document.querySelector("ul.deck");
     for (let i = 0; i < 16; i++) {
         const card = document.createElement("li");
         card.setAttribute("class", "card");
         card.addEventListener("click", do_action);
         deck.append(card);
-        
-
-        
 
 
-        
-        
+
+
+
+
+
     }
     resetButton();
-    
-    
-    
 
 
-    
+
+
+
+
 
     document.querySelector('.restart').addEventListener("click", resetButton);
 
@@ -238,16 +238,16 @@ let finalTime = document.querySelector('.finalTime');
 //listen for click
 modalBtn.addEventListener('click', openModal);
 
-closeBtn.addEventListener('click',closeModal);
+closeBtn.addEventListener('click', closeModal);
 //function to open modal
 
-function openModal(){
+function openModal() {
     modal.style.display = 'block';
     finalScore();
-    
+
 }
 
-function closeModal(){
+function closeModal() {
     resetButton();
     modal.style.display = 'none';
 }
