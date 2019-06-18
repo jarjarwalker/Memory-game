@@ -5,8 +5,6 @@ let _array = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf", "bic
 
 _array = [..._array, ..._array];
 
-//modal element
-
 
 
 /*
@@ -253,7 +251,7 @@ function openModal() {
     }
 
     modal.style.display = 'block';
-    //finalScore();
+   
 
 }
 
@@ -262,18 +260,3 @@ function closeModal() {
     resetButton();
     modal.style.display = 'none';
 }
-
-let score = document.getElementById('finalScore');
-let starCount = starRating.childElementCount;
-
-
-/* function finalScore() {
-    if (starRating.childElementCount == 3) {
-        finalScore.innerHTML = '<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>';
-    } else if (starRating.childElementCount == 2) {
-        finalScore.innerHTML = '<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>';
-    } else {
-        finalScore.innerHTML = '<li><i class="fa fa-star"></i></li>';
-    }
-}
- */
