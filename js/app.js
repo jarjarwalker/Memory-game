@@ -44,7 +44,7 @@ function shuffle(array) {
  */
 
 
-//Shuffle deck of cards and reset 
+//Shuffle deck of cards and reset moves and timer 
 function resetButton() {
     console.log(_array);
     _array = shuffle(_array);
@@ -232,8 +232,7 @@ let modalBtn = document.getElementById('modalBtn');
 //Get close Btn
 let closeBtn = document.querySelector('.closeBtn');
 
-let finalMoves = document.querySelector('.finalMoves');
-let finalTime = document.querySelector('.finalTime');
+
 
 //listen for click
 modalBtn.addEventListener('click', openModal);
@@ -242,8 +241,14 @@ closeBtn.addEventListener('click', closeModal);
 //function to open modal
 
 function openModal() {
+    let finalMoves = document.querySelector('.finalMoves');
+    let finalTime = document.querySelector('.finalTime');
+
+    finalMoves.innerHTML = moves;
+    finalTime.innerHTML = c;
+
     modal.style.display = 'block';
-    finalScore();
+    //finalScore();
 
 }
 
@@ -255,8 +260,6 @@ function closeModal() {
 let score = document.getElementById('finalScore');
 let starCount = starRating.childElementCount;
 
-finalMoves.innerHTML = moves;
-finalTime.innerHTML = c;
 
 /* function finalScore() {
     if (starRating.childElementCount == 3) {
