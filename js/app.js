@@ -55,13 +55,14 @@ function resetButton() {
     c = 0;
     stopCount();
     openCards = [];
+    matchedPairs = 0;
     movesCounter.innerHTML = " ";
-
+    //resets star rating back to 3 stars
     starRating.innerHTML = '<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>';
 
 
 
-
+    // turn cards back over
     for (let i = 0; i < cards.length; i++) {
 
         cards[i].classList.remove('match');
@@ -109,13 +110,25 @@ function do_action(e) {
                 openCards[1].classList.remove('show');
 
                 matchedPairs += 1;
+
+                
             }
 
+            //When cards are turned over, disable clicking event
+         
+                for (let index = 0; index < openCards.length; index++) {
+                
+                    openCards[index].style.pointerEvents = "none";
+                }
+            
+            
 
-            //If cards do not match flip them back over
+
+            //If cards do not match flip them back over and enable clicking event
             setTimeout(function () {
-                for (let cards of openCards) {
-                    cards.classList.remove('open', 'show')
+                for (let index = 0; index < openCards.length; index++) {
+                    openCards[index].classList.remove('open', 'show');
+                    openCards[index].style.pointerEvents = "auto";
                 }
 
                 openCards = [];
@@ -129,7 +142,7 @@ function do_action(e) {
     }
     moves += 1;
 
-
+    //displays number of moves
     if (moves == 1) {
         movesCounter.innerHTML = moves + " move";
     } else {
@@ -139,6 +152,7 @@ function do_action(e) {
     rating(moves);
     startCount();
 
+    //When all 8 pairs have been found, timer stops and modal opens
     if (matchedPairs == 8) {
 
         stopCount();
@@ -154,14 +168,15 @@ function do_action(e) {
 
 let starRating = document.querySelector('ul.stars');
 
+//removes a star the longer it takes for you to complete the game
 function rating(x) {
 
-    if (x == 5) {
+    if (x == 20) {
 
         starRating.firstElementChild.remove();
 
     }
-    if (x == 10) {
+    if (x == 50) {
 
         starRating.firstElementChild.remove();
 
@@ -171,13 +186,12 @@ function rating(x) {
 }
 
 
-
-
 let c = 0;
 let t;
 let timer_is_on = 0;
 let timerText = document.querySelector(".timer");
 
+//timer function that starts when player starts game
 function timedCount() {
     timerText.innerHTML = c + " seconds";
     c = c + 1;
@@ -197,7 +211,7 @@ function stopCount() {
 }
 
 
-//Create deck of cards as a list and adds it to the HTML
+//Create cards and add eventlistener and add it to deck
 window.onload = function () {
 
     const deck = document.querySelector("ul.deck");
@@ -207,19 +221,8 @@ window.onload = function () {
         card.addEventListener("click", do_action);
         deck.append(card);
 
-
-
-
-
-
-
     }
     resetButton();
-
-
-
-
-
 
 
     document.querySelector('.restart').addEventListener("click", resetButton);
@@ -227,15 +230,9 @@ window.onload = function () {
 };
 
 let modal = document.getElementById('congratsModal');
-// open modal button
-let modalBtn = document.getElementById('modalBtn');
+
 //Get close Btn
 let closeBtn = document.querySelector('.closeBtn');
-
-
-
-//listen for click
-modalBtn.addEventListener('click', openModal);
 
 closeBtn.addEventListener('click', closeModal);
 //function to open modal
@@ -247,11 +244,20 @@ function openModal() {
     finalMoves.innerHTML = moves;
     finalTime.innerHTML = c;
 
+    if (starRating.childElementCount == 3) {
+        finalScore.innerHTML = 'You got 3 stars! Well Done';
+    } else if (starRating.childElementCount == 2) {
+        finalScore.innerHTML = 'You got 2 stars. Average';
+    } else {
+        finalScore.innerHTML = 'You got 1 star. Poor';
+    }
+
     modal.style.display = 'block';
     //finalScore();
 
 }
 
+//closes modal and resets the game
 function closeModal() {
     resetButton();
     modal.style.display = 'none';
