@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 /*
  * Create a list that holds all of your cards
  */
@@ -16,7 +17,7 @@ _array = [..._array, ..._array];
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length,
+    let currentIndex = array.length,
         temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
@@ -109,17 +110,17 @@ function do_action(e) {
 
                 matchedPairs += 1;
 
-                
+
             }
 
             //When cards are turned over, disable clicking event
-         
-                for (let index = 0; index < openCards.length; index++) {
-                
-                    openCards[index].style.pointerEvents = "none";
-                }
-            
-            
+
+            for (let index = 0; index < openCards.length; index++) {
+
+                openCards[index].style.pointerEvents = "none";
+            }
+
+
 
 
             //If cards do not match flip them back over and enable clicking event
@@ -251,7 +252,7 @@ function openModal() {
     }
 
     modal.style.display = 'block';
-   
+
 
 }
 
