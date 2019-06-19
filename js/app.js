@@ -155,7 +155,24 @@ function do_action(e) {
     if (matchedPairs == 8) {
 
         stopCount();
-        openModal();
+        let stars = '';
+
+        if (starRating.childElementCount == 3) {
+            stars = 'You got 3 stars! ';
+        } else if (starRating.childElementCount == 2) {
+            stars = 'You got 2 stars. ';
+        } else {
+            stars = 'You got 1 star. ';
+        }
+
+        swal({
+
+            
+            title: "Congratulations you beat the game",
+            text: stars + " You won in " + moves + " moves "  + " and " + c + " seconds." ,
+            button: "Play Again!"
+            
+          });
 
     }
 
@@ -228,36 +245,38 @@ window.onload = function () {
 
 };
 
-let modal = document.getElementById('congratsModal');
+// let modal = document.getElementById('congratsModal');
 
-//Get close Btn
-let closeBtn = document.querySelector('.closeBtn');
+// //Get close Btn
+// let closeBtn = document.querySelector('.closeBtn');
 
-closeBtn.addEventListener('click', closeModal);
-//function to open modal
+// closeBtn.addEventListener('click', closeModal);
+// //function to open modal
 
-function openModal() {
-    let finalMoves = document.querySelector('.finalMoves');
-    let finalTime = document.querySelector('.finalTime');
+// function openModal() {
+//     let finalMoves = document.querySelector('.finalMoves');
+//     let finalTime = document.querySelector('.finalTime');
 
-    finalMoves.innerHTML = moves;
-    finalTime.innerHTML = c;
+//     finalMoves.innerHTML = moves;
+//     finalTime.innerHTML = c;
 
-    if (starRating.childElementCount == 3) {
-        finalScore.innerHTML = 'You got 3 stars! Well Done';
-    } else if (starRating.childElementCount == 2) {
-        finalScore.innerHTML = 'You got 2 stars. Average';
-    } else {
-        finalScore.innerHTML = 'You got 1 star. Poor';
-    }
+//     if (starRating.childElementCount == 3) {
+//         finalScore.innerHTML = 'You got 3 stars! Well Done';
+//     } else if (starRating.childElementCount == 2) {
+//         finalScore.innerHTML = 'You got 2 stars. Average';
+//     } else {
+//         finalScore.innerHTML = 'You got 1 star. Poor';
+//     }
 
-    modal.style.display = 'block';
+//     modal.style.display = 'block';
 
 
-}
+// }
 
-//closes modal and resets the game
-function closeModal() {
-    resetButton();
-    modal.style.display = 'none';
-}
+
+
+// //closes modal and resets the game
+// function closeModal() {
+//     resetButton();
+//     modal.style.display = 'none';
+// }

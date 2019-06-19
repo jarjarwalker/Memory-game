@@ -19,3 +19,5 @@ Try and match all the pairs in the least amount of time.
 ### Dependencies:
 * [Font Awesome]https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css.
 * [Google Fonts]https://fonts.googleapis.com/css?family=Coda.
+* [Sweet Alert]https://unpkg.com/sweetalert/dist/sweetalert.min.js.
+
