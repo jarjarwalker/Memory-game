@@ -174,6 +174,10 @@ function do_action(e) {
             
           });
 
+           resetButton(); 
+          
+          
+
     }
 
 
